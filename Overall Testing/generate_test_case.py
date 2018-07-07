@@ -32,7 +32,7 @@ for i in range(10):
     inp = "".join(choice(all_char) for x in range(randint(min_char, max_char)))
     sha256.update(inp.encode())
     hex_inp = "".join("{:0x}".format(ord(c)) for c in inp)
-    hex_messages_file.write(inp + "\n")
+    hex_messages_file.write(hex_inp + "\n")
     sha2_hex_digests_file.write(sha256.hexdigest() + "\n")
     print("input string:", inp)
     print("input hex:", hex_inp)
