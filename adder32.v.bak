@@ -1,4 +1,4 @@
-// This Module has been writen by Ali Zeynali
+// This Module has writen by Ali Zeynali
 //32 bit (parametric) adder
 module adder32(input1, input2, answer);
 

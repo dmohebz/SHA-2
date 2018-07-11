@@ -2,7 +2,7 @@ module Hash_Register(H, clk, we, reset, a, b, c, d, e, f, g, h);
 input clk, we, reset; // reset is synchronize and active high
 input [31:0] a, b, c, d, e, f, g, h; // a is H[0], b is H[1], c is H[2] ... h is H[7]
 output [32*8-1:0] H; //Output hashed
-reg [31:0] h0, h1, h2, h3, h4, h5, h6, h7; //registers which contain hash values
+output reg [31:0] h0, h1, h2, h3, h4, h5, h6, h7; //registers which contain hash values
 wire [31:0] w0, w1, w2, w3, w4, w5, w6, w7; // wires wich connect adder to register
 initial
     begin
