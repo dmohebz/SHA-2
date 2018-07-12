@@ -5,7 +5,9 @@ module roundOps_plus_hashReg #(parameter WORD_SIZE=32, ROUNDS=64)(
   input [WORD_SIZE:1] message_schedule_value,
   input clock,
   input input_ready,
-  input clear
+  input clear,
+  
+  input reset
 );
 
 wire [WORD_SIZE:1] a_final, b_final, c_final, d_final, e_final, f_final, g_final, h_final;
@@ -32,7 +34,7 @@ round_operations ro(a_final, b_final, c_final, d_final, e_final, f_final, g_fina
                       clear
 );
 
-Hash_Register hr(H, clock, output_ready, a_final, b_final, c_final, d_final, e_final, f_final, g_final, h_final);
+Hash_Register hr(H, clock, output_ready, reset, a_final, b_final, c_final, d_final, e_final, f_final, g_final, h_final);
 
 function integer clogb2;
     input [31:0] value; begin 

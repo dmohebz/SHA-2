@@ -9,12 +9,51 @@ module roundOps_plus_hashReg_tb;
   always #10 clock = ~clock;
   reg clear;
   
+  reg reset;
+  
   wire [WORD_SIZE:1] message_schedule_value;
   wire [WORD_SIZE*8-1:0] H;
   
-  roundOps_plus_hashReg ro_hr(H, message_schedule_value, clock, input_ready, clear);
+  roundOps_plus_hashReg ro_hr(H, message_schedule_value, clock, input_ready, clear, reset);
   
   
+  integer test_case,j;
+  wire [WORD_SIZE:1] temp;
+  reg a = 1;
+  
+  initial begin
+    clock = 1'b0;
+    clear = 1'b0;
+    reset = 1'b0;
+    input_ready = 1'b0;
+    #1
+    clear = 1'b1;
+    reset = 1'b1;
+    #10
+    clear = 1'b0;
+    reset = 1'b0;
+    message_file = $fopen("input_message_registers.txt", "r");
+    out_file = $fopen("output_round_operations.txt", "r");
+    
+    for (test_case = 0; test_case < 1; test_case = test_case + 1) begin
+      
+      for ( j = 0; j < 64; j = j+1 ) begin 
+        $fscanf(message_file, "%x", message_schedule[j]);
+      end
+      #1
+      input_ready = 1;
+      #20
+      input_ready = 0;
+      
+      #700
+      $display("%h", H);
+      
+      
+    end
+    
+    $stop;
+    
+  end
   
   
 endmodule
