@@ -68,10 +68,8 @@ always @(posedge clock or posedge clear) begin
               h_final <= h_init;
             end
     BUSY: 
-              if (cnt == 64) begin
+              if (cnt == 64) 
                 state <= DONE;
-                $display("64 marhale passed");
-              end
               else
                 begin
                 a_final <= a;

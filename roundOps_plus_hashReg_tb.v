@@ -11,10 +11,13 @@ module roundOps_plus_hashReg_tb;
   
   reg reset;
   
-  wire [WORD_SIZE:1] message_schedule_value;
   wire [WORD_SIZE*8-1:0] H;
+   
+  wire [clogb2(ROUNDS):1] message_schedule_index;
+  wire [WORD_SIZE:1] message_schedule_value;
+  assign message_schedule_value = message_schedule[message_schedule_index];
   
-  roundOps_plus_hashReg ro_hr(H, message_schedule_value, clock, input_ready, clear, reset);
+  roundOps_plus_hashReg ro_hr(H, message_schedule_index, message_schedule_value, clock, input_ready, clear, reset);
   
   
   integer test_case,j;
@@ -42,6 +45,12 @@ module roundOps_plus_hashReg_tb;
       end
       #1
       input_ready = 1;
+      
+      $display("%h", H);
+      
+      #50
+      $display("%h", H);
+      
       #20
       input_ready = 0;
       
@@ -54,6 +63,15 @@ module roundOps_plus_hashReg_tb;
     $stop;
     
   end
+  
+  function integer clogb2;
+    input [31:0] value; begin 
+        value = value - 1;
+        for (clogb2 = 0; value > 0; clogb2 = clogb2 + 1) begin
+            value = value >> 1;
+        end
+    end
+  endfunction
   
   
 endmodule
