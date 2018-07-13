@@ -83,6 +83,7 @@ always @(posedge clock or posedge clear) begin
                 g_final <= g;
                 h_final <= h;
                 cnt <= cnt + 7'b1;
+                $display("%d", cnt);
                 end
           
     DONE: state = IDLE;

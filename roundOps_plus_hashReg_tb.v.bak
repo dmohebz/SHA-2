@@ -48,6 +48,9 @@ module roundOps_plus_hashReg_tb;
       
       $display("%h", H);
       
+      #50
+      $display("%h", H);
+      
       #20
       input_ready = 0;
       
